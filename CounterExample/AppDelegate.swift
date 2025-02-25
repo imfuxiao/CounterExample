@@ -6,23 +6,26 @@
 //  Copyright © 2016 Colin Eberhardt. All rights reserved.
 //
 
-import UIKit
 import ReSwift
+import UIKit
 
-// The global application store, which is responsible for managing the appliction state.
-let mainStore = Store<AppState>(
-    reducer: counterReducer,
-    state: nil
-)
-
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  let injectionContainer = AppDependencyContainer()
+  var window: UIWindow?
 
-    var window: UIWindow?
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    let mainVC = injectionContainer.makeMainViewController()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        return true
+    if window == nil {
+      let window = UIWindow()
+      window.frame = UIScreen.main.bounds
+      window.makeKeyAndVisible()
+      window.rootViewController = mainVC
+      self.window = window
     }
 
-}
+    return true
+  }
 
+}

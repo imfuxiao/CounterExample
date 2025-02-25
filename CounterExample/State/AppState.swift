@@ -1,5 +1,5 @@
-import ReSwift
+import Foundation
 
-struct AppState: StateType {
-    var counter: Int = 0
+public struct AppState: Hashable, Sendable {
+  var counter: Int = 0
 }
